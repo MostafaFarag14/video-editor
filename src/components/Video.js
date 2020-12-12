@@ -1,36 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { Dropdown, Input } from 'semantic-ui-react'
-
-export default function Video({ source }) {
-  const [heightRatio, setHeightRatio] = useState(1)
-  const [widthRatio, setWidthRatio] = useState(1)
-
-  useEffect(() => {
-
-  }, [heightRatio, widthRatio])
-
-  const ratios = [
-    { key: 'af', value: [16, 9], text: '16:9' },
-    { key: 'ax', value: [4, 3], text: '4:3' },
-    { key: 'al', value: [1, 1], text: '1:1' },
-    { key: 'dz', value: [16, 10], text: '16:10' },
-
-  ]
-
+import React, { useEffect, useRef, useState } from 'react'
+import Draggable from 'react-draggable'
+import { Player } from 'video-react'
+export default function Video({ videoSource, ratio, textColor }) {
+  const [text, setText] = useState('Add Text')
   return (
-    <div>
-      <div>
-        <Dropdown
-          clearable
-          selection
-          options={ratios}
-          placeholder='Select Country'
-          onChange={(e, data) => { setHeightRatio(data.value[1]); setWidthRatio(data.value[0]) }}
-        />
-        <Input placeholder='width' onChange={(e, { value }) => { setWidthRatio(value) }} />
-        <Input placeholder='height' onChange={(e, { value }) => { setHeightRatio(value) }} />
-      </div>
-      <video style={{ maxWidth: 720 }} height={720 * (heightRatio / widthRatio)} controls src={source} />
+    <div style={{ margin: '0px 20px',}}>
+      <Draggable bounds='parent'>
+        <div style={{ position: "relative", zIndex: 5, width: '25%' }}>
+          <input color={textColor} placeholder='Sample Text' onChange={((e) => { setText(e.target.value) })}
+            style={{ color: textColor, fontSize: 30, background: 'rgba(0,0,0,0)', border: 'none', width: '100%' }} value={text}></input>
+        </div>
+      </Draggable>
+      <Player aspectRatio={ratio} autoPlay src={videoSource} fluid />
     </div>
   )
 }

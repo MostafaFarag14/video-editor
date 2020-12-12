@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import TextEdit from "./TextEdit";
-import Video from './Video'
+import React, { useEffect, useRef, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { Button, Input } from 'semantic-ui-react'
 
-export default function FileInput() {
+export default function FileInput({ setVideoSource }) {
   const [file, setFile] = useState(null)
-  const [source, setSource] = useState()
-
+  const history = useHistory()
+  const fileInput = useRef()
 
   const readFile = file => {
-    const reader = new FileReader()
-    reader.onload = () => {
-      setSource(reader.result)
-    }
-    reader.readAsDataURL(file)
+    var fileURL = URL.createObjectURL(file)
+    setVideoSource(fileURL)
   }
 
   const onChange = (e) => {
@@ -22,19 +19,11 @@ export default function FileInput() {
   useEffect(() => {
     file && readFile(file)
   }, [file])
-  return (
-    <div style={{ textAlign: 'center' }}>
-      <input type='file' onChange={onChange} />
-      {
-        source === undefined || file === null ?
-          <p>loading</p>
-          :
-          <div>
-            <TextEdit />
-            <Video source={source} />
-          </div>
-      }
 
-    </div>
+  return (
+    <>
+      <input ref={fileInput} style={{ display: 'none' }} type='file' onChange={onChange} />
+      <Button size='large' icon='upload' onClick={() => fileInput.current.click()} content='UPLOAD FILE' />
+    </>
   )
 }
