@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Grid, Header } from 'semantic-ui-react'
 import AspectRatioEdit from './AspectRatioEdit'
 import { CirclePicker } from 'react-color'
+import { VideoContext } from '../contexts/VideoContext'
 
-export default function EditMenu({ setRatio, setTextColor }) {
+export default function EditMenu() {
+  const {setRatio, setTextColor } = useContext(VideoContext)
   return (
     <Grid.Column computer={3} tablet={4}
       style={{

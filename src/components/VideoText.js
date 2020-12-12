@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Draggable from 'react-draggable'
 
 export default function VideoText({ textColor }) {
-  const [text, setText] = useState('Add Draggable Text')
+  const [text, setText] = useState('Draggable Text')
   return (
     <Draggable bounds='parent' >
       <input color={textColor} placeholder='Sample Text' onChange={((e) => { setText(e.target.value) })}

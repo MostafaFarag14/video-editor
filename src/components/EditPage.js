@@ -3,12 +3,12 @@ import { Grid, Tab } from 'semantic-ui-react'
 import UrlVideoPage from './UrlVideoPage'
 import LocalVideoPage from './LocalVideoPage'
 
-export default function EditPage({ ratio, textColor }) {
+export default function EditPage() {
 
 
   const panes = [
-    { menuItem: 'Browse Local File', render: () => <LocalVideoPage ratio={ratio} textColor={textColor} /> },
-    { menuItem: 'Insert YouTube URL', render: () => <UrlVideoPage ratio={ratio} textColor={textColor} /> }
+    { menuItem: 'Browse Local File', render: () => <LocalVideoPage /> },
+    { menuItem: 'Insert YouTube URL', render: () => <UrlVideoPage /> }
   ]
 
   return (
