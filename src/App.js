@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useState } from 'react'
 import { Grid } from "semantic-ui-react";
-import { Route, Switch } from "react-router-dom";
-import FileInput from "./components/FileInput";
 import EditPage from "./components/EditPage";
-export default function App() {
+import EditMenu from './components/EditMenu'
 
-  const [videoSource, setVideoSource] = useState()
+export default function App() {
+  const [ratio, setRatio] = useState('16:9')
+  const [textColor, setTextColor] = useState('yellow')
 
   return (
     <Grid padded stackable style={{ height: '100vh' }} centered >
-      <EditPage setVideoSource={setVideoSource} videoSource={videoSource} />
+      <EditPage ratio={ratio} textColor={textColor} />
+      <EditMenu setTextColor={setTextColor} setRatio={setRatio} />
     </Grid>
   )
 }
